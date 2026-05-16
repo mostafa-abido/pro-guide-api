@@ -1,0 +1,17 @@
+After npm run build, these MUST exist on server at public_html/public/spa/:
+
+index.html          -> must contain:  src="/assets/index-
+assets/index-*.js
+assets/index-*.css
+hero.mp4
+logo.png
+serv1.png ... serv6.png
+
+WRONG (old build):  src="/index-DOgyGK8G.js"  (missing /assets/)
+WRONG (old build):  href="/spa/assets/..."
+
+Test URLs (all must work, not 404/500):
+https://germanyproguide.com/assets/index-DOgyGK8G.js
+https://germanyproguide.com/assets/index-BTWa8B2V.css
+https://germanyproguide.com/hero.mp4
+https://germanyproguide.com/storage/services/01KQCF8KGKVXFT70FQZ0CSGBC1.png

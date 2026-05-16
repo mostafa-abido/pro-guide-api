@@ -1,0 +1,280 @@
+{
+  "info": {
+    "_postman_id": "2a6ab0a3-5c1b-4d17-9f71-1a1e3b0e6a3a",
+    "name": "Pro Guide API (v1)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://127.0.0.1:8000"
+    }
+  ],
+  "item": [
+    {
+      "name": "Health",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/health",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "health"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Homepage (All data)",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/homepage",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "homepage"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Settings",
+      "item": [
+        {
+          "name": "Get settings",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/settings",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "settings"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Upsert settings (PUT)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"site_name\": \"GermanyProGuide\",\n  \"contact_email\": \"admin@admin.com\",\n  \"contact_phone\": \"+49...\",\n  \"contact_whatsapp\": \"+49...\",\n  \"social_links\": {\n    \"facebook\": \"https://facebook.com/yourpage\",\n    \"instagram\": \"https://instagram.com/yourpage\"\n  },\n  \"footer_text\": \"© 2026 GermanyProGuide\"\n}\n"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/settings",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "settings"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Home Sections",
+      "item": [
+        {
+          "name": "Get home sections",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/home",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "home"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Services",
+      "item": [
+        {
+          "name": "List services",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/services?per_page=50&published_only=true",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "services"
+              ],
+              "query": [
+                {
+                  "key": "per_page",
+                  "value": "50"
+                },
+                {
+                  "key": "published_only",
+                  "value": "true"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Show service by slug",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/services/study-in-germany",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "services",
+                "study-in-germany"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Stats",
+      "item": [
+        {
+          "name": "Get stats",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/stats",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "stats"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Contact",
+      "item": [
+        {
+          "name": "Send contact message (POST)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"first_name\": \"Mostafa\",\n  \"last_name\": \"Abido\",\n  \"email\": \"test@example.com\",\n  \"phone\": \"+2010...\",\n  \"message\": \"Hello, I want a consultation.\"\n}\n"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/contact",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "contact"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Booking",
+      "item": [
+        {
+          "name": "Get availability by date",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/availability?date=2026-01-24",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "availability"
+              ],
+              "query": [
+                {
+                  "key": "date",
+                  "value": "2026-01-24"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Create booking (POST)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"date\": \"2026-01-24\",\n  \"time\": \"12:00\",\n  \"full_name\": \"Test User\",\n  \"email\": \"t@example.com\",\n  \"phone\": \"+49...\"\n}\n"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/bookings",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "bookings"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
+

@@ -1,0 +1,39 @@
+# Upload to: public_html/.htaccess (full file — same folder as index.php)
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+
+    # --- React static files (files live in public/spa/) ---
+    RewriteRule ^assets/(.*)$ public/spa/assets/$1 [L]
+    RewriteRule ^hero\.mp4$ public/spa/hero.mp4 [L]
+    RewriteRule ^logo\.png$ public/spa/logo.png [L]
+    RewriteRule ^serv([0-9]+)\.png$ public/spa/serv$1.png [L]
+    RewriteRule ^spa/(.*)$ public/spa/$1 [L]
+
+    # --- Dashboard uploads (use public/storage symlink, NOT storage/services/) ---
+    RewriteRule ^storage/(.*)$ public/storage/$1 [L]
+</IfModule>
+
+<IfModule mod_rewrite.c>
+    <IfModule mod_negotiation.c>
+        Options -MultiViews -Indexes
+    </IfModule>
+
+    RewriteEngine On
+    RewriteBase /
+
+    RewriteCond %{HTTP:Authorization} .
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+    RewriteCond %{HTTP:x-xsrf-token} .
+    RewriteRule .* - [E=HTTP_X_XSRF_TOKEN:%{HTTP:X-XSRF-Token}]
+
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_URI} (.+)/$
+    RewriteRule ^ %1 [L,R=301]
+
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^ index.php [L]
+</IfModule>
