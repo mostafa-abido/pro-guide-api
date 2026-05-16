@@ -26,14 +26,10 @@ export default function Booking() {
 
 useEffect(() => {
   const fetchSlots = async () => {
-    if (!date) return;
-
     setIsLoading(true);
 
     try {
-const formattedDate = "2026-05-04";
-
-      const response = await getAvailability(formattedDate);
+      const response = await getAvailability();
 
       // 👇 هنا المكان الصح
       console.log("API RESPONSE:", response.data);
@@ -53,7 +49,7 @@ const formattedDate = "2026-05-04";
   };
 
   fetchSlots();
-}, [date]);
+}, []);
 
   // دالة لتنسيق التاريخ حسب اللغة المختارة
   const formatDate = (dateString: string) => {
