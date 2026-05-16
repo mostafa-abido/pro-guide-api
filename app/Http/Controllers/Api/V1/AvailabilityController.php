@@ -17,7 +17,7 @@ class AvailabilityController extends Controller
     public function index(AvailabilityIndexRequest $request): JsonResponse
     {
         $dto = \App\DTO\AvailabilityIndexData::fromValidated($request->validated());
-        $slots = $this->availabilityService->listByDate($dto);
+        $slots = $this->availabilityService->listFromNow($dto);
 
         return response()->json([
             'data' => AppointmentSlotResource::collection($slots),

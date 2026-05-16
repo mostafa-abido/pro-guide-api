@@ -2,11 +2,9 @@
 
 namespace App\DTO;
 
-use Carbon\CarbonImmutable;
-
 final readonly class AvailabilityIndexData
 {
-    public function __construct(public CarbonImmutable $date)
+    public function __construct(public bool $includeBooked = false)
     {
     }
 
@@ -15,10 +13,8 @@ final readonly class AvailabilityIndexData
      */
     public static function fromValidated(array $validated): self
     {
-        /** @var string $date */
-        $date = $validated['date'];
-
-        return new self(CarbonImmutable::parse($date)->startOfDay());
+        return new self(
+            includeBooked: filter_var($validated['include_booked'] ?? false, FILTER_VALIDATE_BOOLEAN),
+        );
     }
 }
-

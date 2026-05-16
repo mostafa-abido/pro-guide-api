@@ -11,12 +11,27 @@ final class AvailabilityService
     /**
      * @return Collection<int, AppointmentSlot>
      */
-    public function listByDate(AvailabilityIndexData $data): Collection
+    public function listFromNow(AvailabilityIndexData $data): Collection
     {
-        return AppointmentSlot::query()
-            ->whereDate('date', $data->date->toDateString())
+        $now = now();
+        $today = $now->toDateString();
+
+        $query = AppointmentSlot::query()
+            ->where(function ($query) use ($now, $today): void {
+                $query->where('date', '>', $today)
+                    ->orWhere(function ($query) use ($now, $today): void {
+                        $query->where('date', $today)
+                            ->whereTime('time', '>=', $now);
+                    });
+            });
+
+        if (! $data->includeBooked) {
+            $query->where('is_booked', false);
+        }
+
+        return $query
+            ->orderBy('date')
             ->orderBy('time')
             ->get();
     }
 }
-

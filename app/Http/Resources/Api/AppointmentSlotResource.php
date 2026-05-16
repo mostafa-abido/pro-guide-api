@@ -17,6 +17,7 @@ final class AppointmentSlotResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
+            'id' => $this->id,
             'date' => $this->date?->format('Y-m-d'),
             'time' => substr((string) $this->time, 0, 5),
             'duration_minutes' => $this->duration_minutes,
