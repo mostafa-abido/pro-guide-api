@@ -27,6 +27,12 @@ final class AvailabilityService
 
         if (! $data->includeBooked) {
             $query->where('is_booked', false);
+
+            $minutes = config('stripe.pending_minutes', 30);
+            $query->whereDoesntHave('bookings', function ($q) use ($minutes): void {
+                $q->where('status', 'pending')
+                    ->where('created_at', '>=', now()->subMinutes($minutes));
+            });
         }
 
         return $query

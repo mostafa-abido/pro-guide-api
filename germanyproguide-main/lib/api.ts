@@ -59,13 +59,17 @@ export const getAvailability = () =>
       include_booked: 0,
     },
   });
-export const createBooking = (bookingData: {
-  appointment_slot_id: string;
+export const createBookingCheckout = (data: {
+  appointment_slot_id: number;
   full_name: string;
   email: string;
-  phone: string;
-  notes?: string;
-}) => apiClient.post('/bookings', bookingData);
+  phone?: string;
+}) => apiClient.post('/bookings/checkout', data);
+
+export const confirmBookingCheckout = (sessionId: string) =>
+  apiClient.get('/bookings/checkout/success', {
+    params: { session_id: sessionId },
+  });
 
 // --- الاتصال (Contact) ---
 export const sendContactMessage = (messageData: {

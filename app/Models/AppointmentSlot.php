@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class AppointmentSlot extends Model
@@ -24,8 +25,13 @@ class AppointmentSlot extends Model
         ];
     }
 
+    public function bookings(): HasMany
+    {
+        return $this->hasMany(Booking::class);
+    }
+
     public function booking(): HasOne
     {
-        return $this->hasOne(Booking::class);
+        return $this->hasOne(Booking::class)->latestOfMany();
     }
 }

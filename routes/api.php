@@ -17,6 +17,8 @@ Route::prefix('v1')->group(function () {
     Route::post('/contact', [\App\Http\Controllers\Api\V1\ContactController::class, 'store']);
 
     Route::get('/availability', [\App\Http\Controllers\Api\V1\AvailabilityController::class, 'index']);
-    Route::post('/bookings', [\App\Http\Controllers\Api\V1\BookingsController::class, 'store']);
+    Route::post('/bookings/checkout', [\App\Http\Controllers\Api\V1\BookingsController::class, 'checkout']);
+    Route::get('/bookings/checkout/success', [\App\Http\Controllers\Api\V1\BookingsController::class, 'success']);
+    Route::post('/stripe/webhook', [\App\Http\Controllers\Api\V1\StripeWebhookController::class, 'handle']);
 });
 
